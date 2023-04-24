@@ -1,0 +1,12 @@
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\bin\Debug\net6.0\SizingGuideLibrary.deps.json
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\bin\Debug\net6.0\SizingGuideLibrary.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\bin\Debug\net6.0\SizingGuideLibrary.pdb
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\SizingGuideLibrary.csproj.AssemblyReference.cache
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\SizingGuideLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\SizingGuideLibrary.AssemblyInfoInputs.cache
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\SizingGuideLibrary.AssemblyInfo.cs
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\SizingGuideLibrary.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\SizingGuideLibrary.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\refint\SizingGuideLibrary.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\SizingGuideLibrary.pdb
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\SizingGuideLibrary\obj\Debug\net6.0\ref\SizingGuideLibrary.dll
