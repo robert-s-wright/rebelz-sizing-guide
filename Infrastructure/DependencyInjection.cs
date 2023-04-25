@@ -11,13 +11,19 @@ namespace Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration
             )
         {
+            string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
             //Cors
             services.AddCors(options =>
             {
-                options.AddPolicy("_myAllowSpecificOrigins",
+                //var origins = configuration.GetSection("AllowedHosts").Get<string[]>();
+                options.AddPolicy(myAllowSpecificOrigins,
                     policy =>
                     {
-                        policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                        var origins = configuration["AllowedHosts"];
+                        policy.WithOrigins("http://localhost:3000", "https://localhost:7287").AllowAnyMethod().AllowAnyHeader();
+                        policy.WithHeaders().AllowCredentials().WithMethods("GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS");
+
                     }
                     );
             });
@@ -70,6 +76,7 @@ namespace Infrastructure
 
 
                 });
+
 
 
             return services;

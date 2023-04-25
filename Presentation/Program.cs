@@ -1,6 +1,7 @@
 using Application;
 using Application.DataAccess;
 using Infrastructure;
+using Microsoft.AspNetCore.CookiePolicy;
 
 namespace Presentation
 {
@@ -11,6 +12,8 @@ namespace Presentation
             GlobalConfig.InitializeConnections(DatabaseType.Sql);
 
             var builder = WebApplication.CreateBuilder(args);
+
+            string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 
 
@@ -32,12 +35,14 @@ namespace Presentation
 
             //});
 
-            //builder.Services.AddCookiePolicy(options =>
-            //{
-            //    options.Secure = CookieSecurePolicy.Always;
-            //    options.HttpOnly = HttpOnlyPolicy.Always;
+            builder.Services.AddCookiePolicy(options =>
+            {
+                options.Secure = CookieSecurePolicy.Always;
+                options.HttpOnly = HttpOnlyPolicy.Always;
 
-            //});
+
+            });
+
 
 
             builder.Services.AddInfrastructure(builder.Configuration);
@@ -55,7 +60,7 @@ namespace Presentation
             }
 
             //app Cors
-            app.UseCors("_myAllowSpecificOrigins");
+            app.UseCors(myAllowSpecificOrigins);
             app.UseHttpsRedirection();
 
             app.UseRouting();

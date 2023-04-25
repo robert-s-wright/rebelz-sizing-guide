@@ -77,3 +77,6 @@ C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\obj\
 C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\obj\Debug\net6.0\ref\Presentation.dll
 C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\sample.app.config
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\sample.appsettings.Development.json
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\sample.appsettings.json

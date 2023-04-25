@@ -113,17 +113,19 @@ namespace Presentation.Controllers
                     Response.Cookies.Append(_configuration["Jwt:AuthTokenKey"], jwt, new CookieOptions
                     {
                         Secure = true,
-                        HttpOnly = false,
+                        HttpOnly = true,
                         SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None,
                         Expires = DateTime.UtcNow.AddDays(1),
                         IsEssential = true,
 
 
+
                     });
 
+                    //GlobalConfig.Connection.GetUserModels_ByUserId(storedUser.Id);
+                    storedUser.Password = null;
 
-
-                    return Ok();
+                    return Ok(storedUser);
 
                 }
                 else
