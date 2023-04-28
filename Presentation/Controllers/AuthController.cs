@@ -12,7 +12,7 @@ namespace Presentation.Controllers
     public class AuthController : ControllerBase
     {
         [HttpGet]
-        public ActionResult Get()
+        public ActionResult Login()
         {
             UserModel user = new UserModel();
 
@@ -31,5 +31,26 @@ namespace Presentation.Controllers
             return Ok(user);
 
         }
+
+        [HttpGet("logout")]
+        public ActionResult Logout()
+        {
+            var cookies = Request.Cookies.FirstOrDefault(cookie => cookie.Key == "authToken");
+
+            if (cookies.Value != null)
+            {
+                Response.Cookies.Append("authToken", "expired", new CookieOptions
+                {
+                    Secure = true,
+                    HttpOnly = true,
+                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None,
+                    Expires = new DateTime(1970, 1, 1, 0, 0, 0),
+                    IsEssential = true,
+                });
+            }
+
+            return Ok();
+        }
+
     }
 }
