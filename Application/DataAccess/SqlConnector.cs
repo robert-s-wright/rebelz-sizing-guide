@@ -244,5 +244,29 @@ namespace Application.DataAccess
 
             }
         }
+
+        public void CreateNewUserRecovery(User_RecoveryModel recoveryModel)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@userId", recoveryModel.UserId);
+                p.Add("@hash", recoveryModel.Hash);
+
+                connection.Execute("dbo.spUser_Recovery_Keys_Insert", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public User_RecoveryModel GetUserRecoveryModel(int userId)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@userId", userId);
+
+                User_RecoveryModel recovery = connection.QueryFirst("dbo.spUser_Recovery_Keys_Select", p, commandType: CommandType.StoredProcedure);
+                return recovery;
+            }
+        }
     }
 }

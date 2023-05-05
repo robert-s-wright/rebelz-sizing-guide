@@ -29,6 +29,10 @@ namespace Application.DataAccess
 
         void CreateNewUserModels(List<User_ModelModel> userModels);
 
+        void CreateNewUserRecovery(User_RecoveryModel recoveryModel);
+
+        User_RecoveryModel GetUserRecoveryModel(int userId);
+
 
     }
 }

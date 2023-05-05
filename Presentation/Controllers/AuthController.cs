@@ -2,15 +2,18 @@
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 using System.IdentityModel.Tokens.Jwt;
+using static Application.Services.Methods;
 
 namespace Presentation.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         public ActionResult Login()
         {
@@ -31,7 +34,7 @@ namespace Presentation.Controllers
             return Ok(user);
 
         }
-
+        [Authorize]
         [HttpGet("logout")]
         public ActionResult Logout()
         {
@@ -48,6 +51,42 @@ namespace Presentation.Controllers
                     IsEssential = true,
                 });
             }
+
+            return Ok();
+        }
+
+        [HttpGet("resetpass{email}")]
+        public ActionResult ResetPassword(string email)
+        {
+            User_RecoveryModel userRecoveryModel = CreateUserRecoveryHash(email);
+
+
+
+
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Robbie Wright", "rs.wright@yahoo.com"));
+            message.To.Add(new MailboxAddress("Robbie Wright", email));
+            message.Subject = $"Hey Robbie, here is the password recovery link you requested";
+            message.Body = new TextPart("plain")
+            {
+                Text = "Please follow the link below to reset your password" +
+                $"http://localhost:3000/{userRecoveryModel.Hash}/" +
+                $"This link will only be valid for 30 minutes, do not share it with anyone!"
+
+
+            };
+
+            message.WriteTo("testEmail");
+
+            //using (var client = new SmtpClient())
+            //{
+            //    //client.Connect("localhost");
+
+            //    client.Send(message);
+            //    //client.Disconnect(true);
+            //}
+
+
 
             return Ok();
         }

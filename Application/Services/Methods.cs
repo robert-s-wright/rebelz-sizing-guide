@@ -11,6 +11,8 @@ namespace Application.Services
 
         private static readonly IPasswordHasher passwordHasher = new PasswordHasher();
 
+        private static readonly IRecoveryHasher _recoveryHasher = new RecoveryHasher();
+
 
         public static void BrandModelSizeRequestCompilation(BrandModelSizeRequestModel data)
         {
@@ -82,5 +84,30 @@ namespace Application.Services
             GlobalConfig.Connection.CreateNewUserMeasurements(user);
             GlobalConfig.Connection.CreateNewUserModels(user.UserModels);
         }
+
+        public static User_RecoveryModel CreateUserRecoveryHash(string email)
+        {
+
+
+            UserModel user = new UserModel();
+            user.Email = email;
+
+            user = GlobalConfig.Connection.GetUser_ByEmail(user);
+
+            User_RecoveryModel recovery = new User_RecoveryModel();
+            if (user.Id != null)
+            {
+                recovery.UserId = (int)user.Id;
+                recovery.Hash = _recoveryHasher.Hash(email);
+            }
+
+            GlobalConfig.Connection.CreateNewUserRecovery(recovery);
+
+            return recovery;
+        }
+
+
+
+
     }
 }
