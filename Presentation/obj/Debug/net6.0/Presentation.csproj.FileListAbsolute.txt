@@ -80,3 +80,10 @@ C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\
 C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\sample.app.config
 C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\sample.appsettings.Development.json
 C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\sample.appsettings.json
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\web.config
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\MailKit.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\MimeKit.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\admin\Documents\Coding\aspnet\SizingGuide\SizingGuide\Presentation\obj\Debug\net6.0\Presentation.MvcApplicationPartsAssemblyInfo.cs
