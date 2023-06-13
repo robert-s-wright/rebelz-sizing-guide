@@ -5,7 +5,7 @@ using System.Data;
 
 namespace Application.DataAccess
 {
-    //Todo - internal or public?
+
     internal class SqlConnector : IDataConnection
     {
         private const string db = "GiData";
@@ -20,6 +20,21 @@ namespace Application.DataAccess
             return output;
 
         }
+
+        public void AddNewBrand(BrandModel brand)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                p.Add("@brandName", brand.BrandName);
+
+                connection.Execute("dbo.spBrands_Insert", p, commandType: CommandType.StoredProcedure);
+
+                brand.Id = p.Get<int>("@id");
+            }
+        }
+
         public List<ModelModel> GetModels_All()
         {
             List<ModelModel> output;
@@ -30,6 +45,23 @@ namespace Application.DataAccess
             }
             return output;
         }
+
+        public void AddNewModel(ModelModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                p.Add("@modelName", model.ModelName);
+                p.Add("@brandId", model.BrandId);
+
+                connection.Execute("dbo.spModels_Insert", p, commandType: CommandType.StoredProcedure);
+
+                model.Id = p.Get<int>("@id");
+            }
+        }
+
+
         public List<SizeModel> GetSizes_All()
         {
             List<SizeModel> output;
@@ -39,6 +71,43 @@ namespace Application.DataAccess
                 output = connection.Query<SizeModel>("dbo.spSizes_GetAll").ToList();
             }
             return output;
+        }
+
+        public void AddNewSize(SizeModel size)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                p.Add("@sizeName", size.SizeName);
+
+                connection.Execute("dbo.spSizes_Insert", p, commandType: CommandType.StoredProcedure);
+
+                size.Id = p.Get<int>("@id");
+
+
+            }
+
+        }
+
+        public void AddModelSizeModels(List<Model_SizeModel> models)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                foreach (Model_SizeModel model in models)
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                    p.Add("@modelId", model.ModelId);
+                    p.Add("@sizeId", model.SizeId);
+                    p.Add("@measId", model.MeasId);
+
+                    connection.Execute("dbo.spModel_Sizes_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    model.Id = p.Get<int>("@id");
+
+                }
+            }
         }
 
         public List<Model_SizeModel> GetModel_Sizes_All()
@@ -170,6 +239,18 @@ namespace Application.DataAccess
             }
         }
 
+        public void UpdateUserPassword(int userId, string password)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@userId", userId);
+                p.Add("@password", password);
+
+                connection.Execute("dbo.spUsers_UpdatePasswordByUserId", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public void CreateNewUserMeasurements(UserSubmissionsModel user)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
@@ -264,9 +345,11 @@ namespace Application.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@userId", userId);
 
-                User_RecoveryModel recovery = connection.QueryFirst("dbo.spUser_Recovery_Keys_Select", p, commandType: CommandType.StoredProcedure);
+                User_RecoveryModel recovery = connection.QueryFirst<User_RecoveryModel>("dbo.spUser_Recovery_Keys_Select", p, commandType: CommandType.StoredProcedure);
                 return recovery;
             }
         }
+
+
     }
 }

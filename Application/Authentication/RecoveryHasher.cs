@@ -26,14 +26,17 @@ namespace Application.Authentication
 
         public bool Verify(string key, string hashedKey)
         {
-            var elements = hashedKey.Split(Delimiter);
-            //var salt = Convert.FromBase64String(elements[0]);
-            var hash = Convert.FromBase64String(elements[1]);
+            if (key == hashedKey) return true;
+            else return false;
 
-            var inputElements = key.Split(Delimiter);
-            var inputHash = Convert.FromBase64String(inputElements[1]);
+            //var elements = hashedKey.Split(Delimiter);
+            ////var salt = Convert.FromBase64String(elements[0]);
+            //var hash = Convert.FromBase64String(elements[1]);
 
-            return CryptographicOperations.FixedTimeEquals(hash, inputHash);
+            //var inputElements = key.Split(Delimiter);
+            //var inputHash = Convert.FromBase64String(inputElements[1]);
+
+            //return CryptographicOperations.FixedTimeEquals(hash, inputHash);
         }
     }
 }

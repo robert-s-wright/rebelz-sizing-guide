@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application;
+using Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 using static Application.Services.Methods;
 
 
@@ -17,6 +19,19 @@ namespace Presentation.Controllers
             List<string> sizeNames = SizeNamesToStringArray();
 
             return Ok(sizeNames);
+        }
+
+        // POST: api/Sizes
+        [HttpPost]
+        public ActionResult PostSizeNames([FromBody] List<SizeModel> sizes)
+        {
+
+            foreach (SizeModel size in sizes)
+            {
+                GlobalConfig.Connection.AddNewSize(size);
+            }
+
+            return Ok(sizes);
         }
 
 

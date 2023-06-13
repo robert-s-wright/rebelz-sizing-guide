@@ -1,5 +1,4 @@
-﻿using Domain.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using static Application.Services.Methods;
 
 
@@ -13,13 +12,7 @@ namespace Presentation.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            BrandModelSizeRequestModel data = new BrandModelSizeRequestModel();
-
-            BrandModelSizeRequestCompilation(data);
-
-            return Ok(data);
+            return Ok(BrandModelSizeRequestCompilation());
         }
-
-
     }
 }

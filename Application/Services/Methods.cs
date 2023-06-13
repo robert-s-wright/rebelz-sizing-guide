@@ -14,13 +14,17 @@ namespace Application.Services
         private static readonly IRecoveryHasher _recoveryHasher = new RecoveryHasher();
 
 
-        public static void BrandModelSizeRequestCompilation(BrandModelSizeRequestModel data)
+        public static BrandModelSizeRequestModel BrandModelSizeRequestCompilation()
         {
+            BrandModelSizeRequestModel data = new BrandModelSizeRequestModel();
+
             data.Brands = GlobalConfig.Connection.GetBrands_All();
             data.Models = GlobalConfig.Connection.GetModels_All();
             data.Sizes = GlobalConfig.Connection.GetSizes_All();
             data.Model_Sizes = GlobalConfig.Connection.GetModel_Sizes_All();
             data.Measurements = GlobalConfig.Connection.GetMeasurements_All();
+
+            return data;
         }
 
         public static List<string> SizeNamesToStringArray()
@@ -41,6 +45,13 @@ namespace Application.Services
             user.Password = passwordHasher.Hash(user.Password);
             GlobalConfig.Connection.RegisterUser(user);
             user.Password = null;
+        }
+
+        public static void UpdateUserPassword(int userId, string password)
+        {
+
+            string hashedPass = passwordHasher.Hash(password);
+            GlobalConfig.Connection.UpdateUserPassword(userId, hashedPass);
         }
 
 
@@ -104,6 +115,18 @@ namespace Application.Services
             GlobalConfig.Connection.CreateNewUserRecovery(recovery);
 
             return recovery;
+        }
+
+        public static bool VerifyUserRecoveryHash(User_RecoveryModel inputRecovery, User_RecoveryModel recoveryFromDb)
+        {
+            if (recoveryFromDb.IsExpired == false)
+            {
+
+                return _recoveryHasher.Verify(inputRecovery.Hash, recoveryFromDb.Hash);
+            }
+            else { return false; }
+
+
         }
 
 

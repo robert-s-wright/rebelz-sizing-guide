@@ -19,7 +19,16 @@ namespace Presentation.Controllers
 
         }
 
+        // POST :api/Brands
+        [HttpPost]
 
+        public ActionResult<BrandModel> Post([FromBody] BrandModel brand)
+        {
+
+            GlobalConfig.Connection.AddNewBrand(brand);
+
+            return Ok(brand);
+        }
 
     }
 }

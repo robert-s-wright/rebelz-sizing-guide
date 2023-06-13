@@ -55,7 +55,7 @@ namespace Presentation.Controllers
             return Ok();
         }
 
-        [HttpGet("resetpass{email}")]
+        [HttpPost("generate/{email}")]
         public ActionResult ResetPassword(string email)
         {
             User_RecoveryModel userRecoveryModel = CreateUserRecoveryHash(email);
@@ -70,11 +70,15 @@ namespace Presentation.Controllers
             message.Body = new TextPart("plain")
             {
                 Text = "Please follow the link below to reset your password" +
-                $"http://localhost:3000/{userRecoveryModel.Hash}/" +
+                Environment.NewLine +
+                $"http://localhost:3000/reset/{userRecoveryModel.UserId}/{userRecoveryModel.Hash}" +
+                Environment.NewLine +
                 $"This link will only be valid for 30 minutes, do not share it with anyone!"
 
 
             };
+
+
 
             message.WriteTo("testEmail");
 
@@ -89,6 +93,32 @@ namespace Presentation.Controllers
 
 
             return Ok();
+        }
+
+        [HttpPatch]
+
+        public ActionResult RecoverPassword(User_RecoveryModel recoveryModel)
+        {
+
+            User_RecoveryModel storedRecoveryModel = GlobalConfig.Connection.GetUserRecoveryModel(recoveryModel.UserId);
+
+            if (storedRecoveryModel != null)
+            {
+                var keyVerification = VerifyUserRecoveryHash(recoveryModel, storedRecoveryModel);
+
+                if (keyVerification)
+                {
+
+
+                    UpdateUserPassword(recoveryModel.UserId, recoveryModel.Password);
+                    return Ok();
+                }
+            }
+
+
+
+            return StatusCode(400, "Invalid or expired key");
+
         }
 
     }

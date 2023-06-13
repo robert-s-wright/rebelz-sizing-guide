@@ -2,10 +2,10 @@
 {
     public class Model_SizeModel
     {
-        public int Id { get; set; }
-        public int modelId { get; set; }
-        public int sizeId { get; set; }
-        public int measId { get; set; }
+        public int? Id { get; set; }
+        public int ModelId { get; set; }
+        public int SizeId { get; set; }
+        public int? MeasId { get; set; }
 
     }
 }
