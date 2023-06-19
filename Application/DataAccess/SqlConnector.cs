@@ -210,6 +210,7 @@ namespace Application.DataAccess
 
                 p.Add("@email", user.Email);
                 p.Add("@password", user.Password);
+                p.Add("@admin", user.Admin);
 
 
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);

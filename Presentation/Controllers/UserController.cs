@@ -137,5 +137,30 @@ namespace Presentation.Controllers
             }
 
         }
+
+        [Route("Admin")]
+        // POST api/<UserController>/Admin
+        [HttpPost]
+
+        public ActionResult AdminLogin([FromBody] UserModel user)
+        {
+            UserModel storedUser = GlobalConfig.Connection.GetUser_ByEmail(user);
+
+            if (storedUser.Admin == true)
+            {
+                bool loginSuccess = LoginUser(user, storedUser, _configuration);
+                if (loginSuccess)
+                {
+                    storedUser.Password = null;
+                    return Ok(storedUser);
+                }
+                else return StatusCode(403);
+            }
+            else
+            {
+                return StatusCode(401);
+            }
+        }
+
     }
 }

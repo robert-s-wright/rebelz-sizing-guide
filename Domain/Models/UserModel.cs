@@ -14,6 +14,8 @@
 
         public string? Password { get; set; }
 
+        public bool Admin { get; set; } = false;
+
         public List<User_MeasurementModel> UserMeasurements { get; set; }
 
 
